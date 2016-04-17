@@ -11,9 +11,15 @@ $(document).ready(function() {
 	function changeBackground () {
 		//prevent default action of submit
 		event.preventDefault();
-		//Store the user submission to var city and also trim the whitespace around it */
-		city = $('#city-type').val().trim();
-		/* Grab the user input before resetting */
+		/* If the invalid choice text is still visible then remove it from the html */
+		if($('.invalid_choice').length) {
+			$('.invalid_choice').remove();
+		}
+		/*Store the user submission to var city and also trim the whitespace around it.
+		Also wanted to ignore the case of the user input so I set their value to all 
+		lowercase then later compared to all lowercase cases in the switch statement. */
+		city = $('#city-type').val().toLowerCase().trim();
+		/* Grab the user input before resetting. Resets the first element in the form. */
 		$('form')[0].reset();
 		console.log("The var city is: " + city);
 
@@ -24,31 +30,31 @@ $(document).ready(function() {
 		user know that their input was not valid. */
 		switch (city) {
 			/* Multiple cases with no break replaces the || operator */
-			case "New York":
-			case "New York City":
-			case "NYC":
+			case "new york":
+			case "new york city":
+			case "nyc":
 				removeBodyClass();
 				$('body').addClass("nyc");
 				break;
-			case "San Francisco":
-			case "SF":
-			case "Bay Area":
+			case "san francisco":
+			case "sf":
+			case "bay area":
 				removeBodyClass();
 				$('body').addClass("sf");
 				break;
-			case "Los Angeles":
-			case "LA":
-			case "LAX":
+			case "los angeles":
+			case "la":
+			case "lax":
 				removeBodyClass();
 				$('body').addClass("la");
 				break;
-			case "Austin":
-			case "ATX":
+			case "austin":
+			case "atx":
 				removeBodyClass();
 				$('body').addClass("austin");
 				break;
-			case "Sydney":
-			case "SYD":
+			case "sydney":
+			case "syd":
 				removeBodyClass();
 				$('body').addClass("sydney");
 				break;
