@@ -21,7 +21,6 @@ $(document).ready(function() {
 		city = $('#city-type').val().toLowerCase().trim();
 		/* Grab the user input before resetting. Resets the first element in the form. */
 		$('form')[0].reset();
-		console.log("The var city is: " + city);
 
 		/* Switch statement instead of if/else with || because it saves on typing lol.
 		Compare the city variable with each expected value for each background. If a 
@@ -33,44 +32,42 @@ $(document).ready(function() {
 			case "new york":
 			case "new york city":
 			case "nyc":
-				removeBodyClass();
-				$('body').addClass("nyc");
+				addBodyClass("nyc");
 				break;
 			case "san francisco":
 			case "sf":
 			case "bay area":
-				removeBodyClass();
-				$('body').addClass("sf");
+				addBodyClass("sf");
 				break;
 			case "los angeles":
 			case "la":
 			case "lax":
-				removeBodyClass();
-				$('body').addClass("la");
+				addBodyClass("la");
 				break;
 			case "austin":
 			case "atx":
-				removeBodyClass();
-				$('body').addClass("austin");
+				addBodyClass("austin");
 				break;
 			case "sydney":
 			case "syd":
-				removeBodyClass();
-				$('body').addClass("sydney");
+				addBodyClass("sydney");
+				break;
+			case "portland": //My gf's hometown.  She insisted.
+			case "pdx":
+				addBodyClass("portland");
 				break;
 			default:
-				removeBodyClass();
-				$('body').addClass("generic_city");
+				addBodyClass("generic_city");  //Might not be needed because <body> with no class has default backgrd set in css
 				$('#submit-btn').after('<p class="invalid_choice">Not a valid option. Please select again :)</p>');
 		}
-		/* .attr() to log the current value of the body class to make sure that the 
-		other class values are removed */
-		console.log($('body').attr("class"));
 	}
 
-	function removeBodyClass() {
+	function addBodyClass(className) {
 		/* Remove only these specific values of the body class in case we want to add 
 		additional classes to the body class for another purpose */
-		$('body').removeClass("nyc sf la austin sydney generic_city");
+		$('body').removeClass("nyc sf la austin sydney portland generic_city");
+		/* Then add the passed in value as the class of the body to change the background in CSS*/
+		$('body').attr("class", className);
+		console.log("class name = " + className);
 	}
 });
